@@ -15,4 +15,10 @@ class TripsController < ApplicationController
     render :json => trip
   end
 
+  def show
+    @trip = Trip.find_by :id => params[:id]
+
+    render json: @trip.stops
+  end
+
 end
