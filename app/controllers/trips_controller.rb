@@ -1,0 +1,18 @@
+class TripsController < ApplicationController
+  def index
+    @trips = Trip.all 
+    render json: @trips
+  end
+
+  def create
+    trip = Trip.create :origin => params[:origin], :destination => params[:destination]
+
+    trip.stops.create :location => params[:origin]
+    params[:stops].each do |stop| 
+      trip.stops.create :location => stop
+    end
+    trip.stops.create :location => params[:destination]
+    render :json => trip
+  end
+
+end
