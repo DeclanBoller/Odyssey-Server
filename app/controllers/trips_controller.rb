@@ -17,7 +17,6 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find_by :id => params[:id]
-    fresh_when(etag: @trip, last_modified: @trip.updated_at, public: true)
 
     render json: @trip.stops
   end
